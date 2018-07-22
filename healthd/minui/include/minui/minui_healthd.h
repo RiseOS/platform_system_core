@@ -74,7 +74,7 @@ struct input_event;
 using ev_callback = std::function<int(int fd, uint32_t epevents)>;
 using ev_set_key_callback = std::function<int(int code, int value)>;
 
-int ev_init(ev_callback input_cb, bool allow_touch_inputs = false);
+int ev_init(ev_callback input_cb);
 void ev_exit();
 int ev_add_fd(int fd, ev_callback cb);
 void ev_iterate_available_keys(const std::function<void(int)>& f);

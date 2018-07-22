@@ -53,12 +53,13 @@ static bool test_bit(size_t bit, unsigned long* array) { // NOLINT
     return (array[bit/BITS_PER_LONG] & (1UL << (bit % BITS_PER_LONG))) != 0;
 }
 
-int ev_init(ev_callback input_cb, bool allow_touch_inputs) {
+int ev_init(ev_callback input_cb) {
   g_epoll_fd = epoll_create(MAX_DEVICES + MAX_MISC_FDS);
   if (g_epoll_fd == -1) {
     return -1;
   }
 
+  bool allow_touch_inputs = false;
   bool epollctlfail = false;
   DIR* dir = opendir("/dev/input");
   if (dir != nullptr) {
